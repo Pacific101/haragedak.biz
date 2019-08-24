@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
+<h1>New comment</h1>
+  <form method="POST" class="post-form">
+    {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="save btn btn-default">Send</button>
+  </form>
+
+<div id="rateYo"></div>
+
+  <script src="{% static 'main_app/js/jquery-3.2.1.min.js' %}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+
+
+    $("#rateYo").rateYo({
+      rating: 2,
+      ratedFill: "#ffbf24",
+      fullStar: true,
+      onSet: function (rating, rateYoInstance) {
+
+      console.log("Rating is set to: " + rating);
+      return rating;
+    }
+    });
+
+  });
+</script>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="#">
+    <meta name="keywords" content="#">
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="#">
+    <!-- Page Title -->
+    <title>Masa</title>
+    <link rel="stylesheet" href="{% static 'main_app/css/style.css' %}">
+
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'main_app/css/bootstrap.min.css'%}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+    <!-- Simple line Icon -->
+    <link rel="stylesheet" href="{% static 'main_app/css/simple-line-icons.css' %}">
+    <!-- Themify Icon -->
+    <link rel="stylesheet" href="{% static 'main_app/css/themify-icons.css' %}">
+    <!-- Hover Effects -->
+    <link rel="stylesheet" href="{% static 'main_app/css/set1.css' %}">
+    <!-- Swipper Slider -->
+    <link rel="stylesheet" href="{% static 'main_app/css/swiper.min.css' %}">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="{% static 'main_app/css/magnific-popup.css' %}">
+    <!-- Main CSS -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<style type="text/css">
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .my:hover {
+    display: none!important;
+  }
+</style>
+<body>
+    <!--============================= HEADER =============================-->
+    <div class="dark-bg sticky-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="{% url 'index' %}" style="color:white;">Masa</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="icon-menu"></span>
+            </button>
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                            <ul class="navbar-nav">
+                              <li class="nav-item active my">
+                            <form action="{% url 'search_view' %}" class="" method="get">
+                              {% csrf_token %}
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <input id='q' name="q" type="text" placeholder="Name, e.g Nakhish" class="btn-group1" style="outline: 0; height: 20px!important;">
+                                    <input id="area" name="area" type="text" placeholder="Area, e.g Baku.." class="btn-group2" style="outline: 0; height: 20px!important;">
+                                    <button type="submit" class="btn-form" style="outline: 0; height: 48px!important; background: #ffbf24;"><div style="margin-top: -5px!important; margin-right: -14px!important;"><span class="icon-magnifier search-icon" style="margin-left: -100px!important; height: 10px!important; font-size: 1em!important;"></span></div><div style="font-size: 0.9em!important; margin-right: -18px!important; margin-top: -27px!important;">SEARCH</div></button>
+                                </div>
+                                </form>
+                              </li>
+
+                                <li class="nav-item dropdown" style="margin-top: 4px!important;">
+                                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
+                   Explore
+                   <span class="ti-angle-down"></span>
+                 </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item" href="{% url 'rests' %}" style="color:white;">Restaurants</a>
+                                        <a class="dropdown-item" href="#" style="color:white;">Traiditional Places</a>
+                                        <a class="dropdown-item" href="#" style="color:white;">Top Rated Places</a>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item active" style="margin-top: 4px!important;">
+                                    <a class="nav-link" href="{% url 'main_app:login' %}" style="color: white;">Login</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style type="text/css">
+      label {
+        width: 7%;
+      }
+
+      label[for='id_image'] {
+        margin-left: 135px;
+      }
+
+      #id_image {
+        margin-right: 30px;
+      }
+
+      #id_profile_pic {
+        outline: 0;
+        width: 16%;
+      }
+    </style>
+
+  <body style="text-align: center;">
+    <div class="jumbotron">
+      <h1>Join Us - It's Free!</h1>
+      <br>
+      <form method="post" enctype="multipart/form-data" onsubmit="return checkform(this);">
+        {% csrf_token %}
+        {{form.as_p}}
+        <br>
+        <center>
+        {{profile_form.as_p}}
+        <br>
+      </center>
+
+        <center>
+        <div class="g-recaptcha" data-sitekey="6Le9FI0UAAAAACnWd2iixxfkMTCoHtYteIBsTq0B"></div>
+      </center>
+      <br>
+</form>
+
+
+        <!-- START CAPTCHA -->
+<!-- <br>
+<div class="capbox" style="background-color: #92D433;
+	border: #B3E272 0px solid;
+	border-width: 0px 12px 0px 0px;
+	display: inline-block;
+	*display: inline; zoom: 1; /* FOR IE7-8 */
+	padding: 8px 40px 8px 8px;
+	}">
+
+<div id="CaptchaDiv" style="font: bold 17px verdana, arial, sans-serif;
+	font-style: italic;
+	color: #000000;
+	background-color: #FFFFFF;
+	padding: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;"></div>
+
+<div class="capbox-inner" style="font: bold 11px arial, sans-serif;
+	color: #000000;
+	background-color: #DBF3BA;
+	margin: 5px auto 0px auto;
+	padding: 3px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;">
+Type the number above:<br>
+
+<input type="hidden" id="txtCaptcha">
+<input type="text" name="CaptchaInput" id="CaptchaInput" size="15" style="margin: 1px 0px 1px 0px; width: 135px; outline:0;"><br>
+
+</div>
+</div>
+<br><br> -->
+<!-- END CAPTCHA -->
+
+        <button type="Sign Up" class="btn-form" style="outline:0; background:#ffbf24; width: 250px;">Sign Up<i class="pe-7s-angle-right"></i></button>
+        <br>
+        <br>
+        <p>Already have an account? <a href="{% url 'main_app:login' %}">Login</a></p>
+      <!-- <script type="text/javascript">
+
+// Captcha Script
+
+function checkform(theform){
+var why = "";
+
+if(theform.CaptchaInput.value == ""){
+why += "- Please Enter CAPTCHA Code.\n";
+}
+if(theform.CaptchaInput.value != ""){
+if(ValidCaptcha(theform.CaptchaInput.value) == false){
+why += "The CAPTCHA is invalid.\n";
+}
+}
+if(why != ""){
+alert(why);
+return false;
+}
+}
+
+var a = Math.ceil(Math.random() * 9)+ '';
+var b = Math.ceil(Math.random() * 9)+ '';
+var c = Math.ceil(Math.random() * 9)+ '';
+var d = Math.ceil(Math.random() * 9)+ '';
+var e = Math.ceil(Math.random() * 9)+ '';
+
+var code = a + b + c + d + e;
+document.getElementById("txtCaptcha").value = code;
+document.getElementById("CaptchaDiv").innerHTML = code;
+
+// Validate input against the generated number
+function ValidCaptcha(){
+var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+var str2 = removeSpaces(document.getElementById('CaptchaInput').value);
+if (str1 == str2){
+return true;
+}else{
+return false;
+}
+}
+
+// Remove the spaces from the entered and generated code
+function removeSpaces(string){
+return string.split(' ').join('');
+}
+</script> -->
+
+    </div>
+
+  </body>
+
+
+
+    <script src="{% static 'main_app/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'main_app/js/popper.min.js' %}"></script>
+    <script src="{% static 'main_app/js/bootstrap.min.js' %}"></script>
+    <!-- Magnific popup JS -->
+    <script src="{% static 'main_app/js/jquery.magnific-popup.js' %}"></script>
+    <!-- Swipper Slider JS -->
+    <script src="{% static 'main_app/js/swiper.min.js' %}"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+    <script>
+        if ($('.image-link').length) {
+            $('.image-link').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
+        }
+        if ($('.image-link2').length) {
+            $('.image-link2').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
+        }
+    </script>
+    <footer class="main-block dark-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <ul>
+                            <li><a href="#"><span class="ti-facebook"></span></a></li>
+                            <li><a href="#"><span class="ti-twitter-alt"></span></a></li>
+                            <li><a href="#"><span class="ti-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
