@@ -14,7 +14,7 @@ elasticsearch-dsl==6.1.0
 idna==2.8
 ipaddress==1.0.22
 jwt==0.6.1
-numpy==1.16.2
+numpy==1.22.0
 oauthlib==3.0.1
 Pillow==6.0.0
 pycparser==2.19
